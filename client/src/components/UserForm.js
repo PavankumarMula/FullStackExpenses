@@ -21,9 +21,9 @@ const UserForm = () => {
           existinguser
         );
         const response = getUser.data;
-        console.log(response);
+        alert(response);
       } catch (error) {
-        console.log(error);
+        alert(error.response.data);
       }
     }
 
@@ -43,6 +43,8 @@ const UserForm = () => {
         alert(error.response.data);
       }
     }
+
+    //reset the form inputs
     setEmail("");
     setName("");
     setPassword("");
