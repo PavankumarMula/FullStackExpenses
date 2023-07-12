@@ -1,13 +1,13 @@
 .form-container{
     display: flex;
     width: 18%;
-    height: 45vh;
+    height: 50vh;
     flex-direction: column;
     justify-content: center;
     margin: auto;
     margin-top: 140px;
     align-items: center;
-    box-shadow: 2px 2px 2px 2px;
+    box-shadow: 2px 2px 4px 2px darkorange;
     border-radius: 10px;
 }
 
@@ -31,7 +31,7 @@
     height: 30px;
     font-family: monospace;
     font-size: large;
-    background-color: lightseagreen;
-    color: darkred;
+    background-color: black;
+    color: yellow;
     cursor: pointer;
 }

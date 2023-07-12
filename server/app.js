@@ -2,6 +2,26 @@ const express=require('express');
 
 const app=express();
 
-app.listen(4000,()=>{
-    console.log(`server is listening at 4000...`);
-});
+const userRouter=require('./Routes/userRouter');
+
+const sequelize=require('./DataBase/database');
+
+const cors=require('cors');
+
+app.use(cors());
+
+app.use(express.json());
+
+app.use(userRouter);
+
+sequelize
+  .sync()
+  .then((res) => {
+    app.listen(4000, () => {
+      console.log("server is running on 4000.... sucessfully");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
