@@ -34,3 +34,9 @@ exports.addUser = async (req, res) => {
 
   res.json(" user added sucessfully");
 };
+
+
+// get the user details based incoming input from form data
+exports.getuser=(req,res)=>{
+    res.json('will build this logic')
+}
