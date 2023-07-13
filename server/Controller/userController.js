@@ -1,10 +1,11 @@
 const userModel = require("../Model/userModel");
+const bcrypt = require("bcrypt");
 
-//function to  Add a user to the database
+//function to  Add a new  user to the database
 exports.addUser = async (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email.toLowerCase();
-  const password = req.body.password;
+  const username = req.body.name;
+  const useremail = req.body.email.toLowerCase();
+  const userpassword = req.body.password;
 
   try {
     // Trying to get all the emails from the database
@@ -14,28 +15,29 @@ exports.addUser = async (req, res) => {
 
     // Checking if the incoming email already exists in the database
     const isEmailExist = getEmails.some(
-      (userEmail) => userEmail.email === email
+      (userEmail) => userEmail.email === useremail
     );
 
     if (isEmailExist) {
       return res.status(400).json("Email already exists");
     } else {
+      // decrypting the password before  comitting into databse
+      const salt = await bcrypt.genSalt(10);
+      const hashPassword = await bcrypt.hash(userpassword, salt);
 
-      // If the email doesn't exist in the database, create a new user
+      //If the email doesn't exist in the database, create a new user
       await userModel.create({
-        username: name,
-        email: email,
-        password: password,
+        username: username,
+        email: useremail,
+        password: hashPassword,
       });
     }
+    return res.json('user added sucessfully');
   } catch (error) {
     console.log(error);
     return res.status(500).json("Internal server error");
   }
-
-  res.json("User added successfully");
 };
-
 
 //function to Retrieve user details based on incoming input from form data
 exports.getuser = async (req, res) => {
@@ -54,14 +56,17 @@ exports.getuser = async (req, res) => {
       (emailObj) => emailObj.email === useremail
     );
 
+    // If the email exists, retrieve the user by email
     if (isEmailExist) {
-      // If the email exists, retrieve the user by email
       const getUser = await userModel.findOne({ where: { email: useremail } });
-      if (getUser.password === userPassword) {
-        return res.json("Successfully logged in");
-      } else {
-        return res.json("Incorrect password");
-      }
+
+      // comparing incoming password with hashed password in db
+      const isPasswordValid = await bcrypt.compare(
+        userPassword,
+        getUser.password
+      );
+      if (isPasswordValid) return res.json("user logged in sucessfully");
+      else return res.json("invalid password");
     } else {
       return res.status(404).json("User not found");
     }
