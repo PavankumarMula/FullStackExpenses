@@ -1,0 +1,16 @@
+.nav-container{
+    height: 50px;
+    width: 100%;
+    background: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 50px;
+}
+.nav-container a{
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 30px;
+    color: black;
+}
