@@ -1,34 +1,133 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Expenses.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { expensesContext } from "../context/expenseContext";
+import { useContext } from "react";
 
 const Expenses = () => {
   const [expense, setExpense] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState(0);
   const [select, setSelect] = useState("");
+  const [editMode, setEditMode] = useState(false);
 
-  const formHandler = (e) => {
+  // accesssing expense Context
+  const expenseCtx = useContext(expensesContext);
+
+  // accessing data received by useNaviage
+  const location = useLocation();
+  const data = location.state?.data;
+
+  useEffect(() => {
+    if (data) {
+      setExpense(data.expenseName);
+      setDesc(data.description);
+      setPrice(data.price);
+      setSelect(data.category);
+      setEditMode(true);
+    }
+  }, [data]);
+
+  // using navige hook from react router dom
+  const navigate = useNavigate();
+
+  // handling form once user is submitted
+  const formHandler = async (e) => {
     e.preventDefault();
-    console.log(expense, desc, price, select);
+    const formData = { expense, desc, price, select };
+
+    //editing the expense
+    if (editMode) {
+      const editedFormData = {
+        id: data.id,
+        expense,
+        price,
+        desc,
+        select,
+      };
+      try {
+        const sendEditedInfo = await axios.put(
+          `http://localhost:4000/expenses`,
+          editedFormData
+        );
+        const response = await sendEditedInfo;
+        const { data, status } = response;
+        if (status === 200) {
+          alert(data);
+
+          expenseCtx.editExpense();
+          // resetting the inputs
+          setExpense("");
+          setDesc("");
+          setPrice("");
+          setSelect("");
+          // navigate to display Expenses page
+          navigate("/displayexpenses");
+        } else {
+          throw new Error("something wrong with adding expenses");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      setEditMode(false);
+    }
+
+    // adding new Expense
+    else {
+      try {
+        const sendFormData = await axios.post(
+          `http://localhost:4000/expenses`,
+          formData
+        );
+        const response = await sendFormData;
+        const { data, status } = response;
+        if (status === 200) {
+          expenseCtx.addExpense();
+          alert(data);
+          // resetting the inputs
+          setExpense("");
+          setDesc("");
+          setPrice("");
+          setSelect("");
+          // navigate to display Expenses page
+          navigate("/displayexpenses");
+        } else {
+          throw new Error("something wrong with adding expenses");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
     <div className="expense-form-container">
       <form onSubmit={formHandler} className="expense-form">
         <label htmlFor="Expense">Expense</label>
-        <input type="text" onChange={(e) => setExpense(e.target.value)}></input>
+        <input
+          type="text"
+          onChange={(e) => setExpense(e.target.value)}
+          value={expense}
+        ></input>
 
         <label htmlFor="description">Description</label>
         <textarea
           onChange={(e) => setDesc(e.target.value)}
           id="desc"
+          value={desc}
         ></textarea>
 
         <label htmlFor="price">Price</label>
-        <input type="number" onChange={(e) => setPrice(e.target.value)}></input>
+        <input
+          type="number"
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
+        ></input>
 
         <label htmlFor="category">Category</label>
-        <select onChange={(e) => setSelect(e.target.value)}>
+        <select onChange={(e) => setSelect(e.target.value)} value={select}>
           <option>Select Here</option>
           <option>Entertainment</option>
           <option>Sports</option>

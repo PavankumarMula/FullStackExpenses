@@ -1,0 +1,29 @@
+.expense-table{
+    margin-top: 40px;
+}
+
+table{
+    width:80%;
+    margin: auto;
+    text-align: center;
+    border: 1px solid lightsalmon;
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+th,td{
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid;
+    margin: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }

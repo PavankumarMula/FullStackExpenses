@@ -4,6 +4,8 @@ const app=express();
 
 const userRouter=require('./Routes/userRouter');
 
+const expenseRouter=require('./Routes/expenseRouter');
+
 const sequelize=require('./DataBase/database');
 
 const cors=require('cors');
@@ -13,6 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use(userRouter);
+
+app.use(expenseRouter);
 
 sequelize
   .sync()

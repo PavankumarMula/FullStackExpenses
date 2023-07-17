@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "../styles/UserForm.css";
 import axios from "axios";
+import { userAuthContext } from "../context/userAuth";
+import { useContext } from "react";
 
 const UserForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [haveAnAccount, setHaveAnAccount] = useState(false);
+
+  // getting auth context here
+  const authContext = useContext(userAuthContext);
+
 
   // Handling the user Input through Form
   const formHandler = async (e) => {
@@ -20,10 +26,14 @@ const UserForm = () => {
           `http://localhost:4000/existinguser`,
           existinguser
         );
-        const response = getUser.data;
-        alert(response);
+        const { status } = await getUser;
+        if (status === 200) {
+          authContext.login();
+        } else {
+          throw new Error("some thing is wrong with status codes");
+        }
       } catch (error) {
-        alert(error.response.data);
+        console.log(error);
       }
     }
 
@@ -94,7 +104,7 @@ const UserForm = () => {
         </form>
 
         <button className="toggle-button" onClick={toggleButtonHandler}>
-          {haveAnAccount ? "new User? Signup" : "Already have an acoount?"}
+          {haveAnAccount ? "new User? Signup" : "Already have an Account?"}
         </button>
       </div>
     </>
