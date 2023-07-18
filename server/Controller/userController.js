@@ -1,5 +1,6 @@
 const userModel = require("../Model/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 //function to  Add a new  user to the database
 exports.addUser = async (req, res) => {
@@ -32,11 +33,16 @@ exports.addUser = async (req, res) => {
         password: hashPassword,
       });
     }
-    return res.json('user added sucessfully');
+    return res.json("user added sucessfully");
   } catch (error) {
     console.log(error);
     return res.status(500).json("Internal server error");
   }
+};
+
+// generating the decrypted userId
+const generateJwt = (id, name) => {
+  return jwt.sign({ userId: id, name: name }, "secretsByPavanPups");
 };
 
 //function to Retrieve user details based on incoming input from form data
@@ -65,8 +71,11 @@ exports.getuser = async (req, res) => {
         userPassword,
         getUser.password
       );
-      if (isPasswordValid) return res.json("user logged in sucessfully");
-      else return res.json("invalid password");
+      if (isPasswordValid) {
+        // generate password if the password matches
+        let token = generateJwt(getUser.id, getUser.username);
+        return res.status(200).json({ user: getUser.username, token });
+      } else return res.json("invalid password");
     } else {
       return res.status(404).json("User not found");
     }

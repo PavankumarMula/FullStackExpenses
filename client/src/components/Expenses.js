@@ -16,7 +16,7 @@ const Expenses = () => {
   // accesssing expense Context
   const expenseCtx = useContext(expensesContext);
 
-  // accessing data received by useNaviage
+  // accessing data received by useNaviagate
   const location = useLocation();
   const data = location.state?.data;
 
@@ -36,8 +36,12 @@ const Expenses = () => {
   // handling form once user is submitted
   const formHandler = async (e) => {
     e.preventDefault();
-    const formData = { expense, desc, price, select };
 
+    //accessing token sending it to the headers
+    const token=localStorage.getItem('token');
+  
+    // sending user inputs in the form of object
+    const formData = { expense, desc, price, select };
     //editing the expense
     if (editMode) {
       const editedFormData = {
@@ -50,7 +54,7 @@ const Expenses = () => {
       try {
         const sendEditedInfo = await axios.put(
           `http://localhost:4000/expenses`,
-          editedFormData
+          editedFormData,{headers:{Authorization:token}}
         );
         const response = await sendEditedInfo;
         const { data, status } = response;
@@ -79,7 +83,7 @@ const Expenses = () => {
       try {
         const sendFormData = await axios.post(
           `http://localhost:4000/expenses`,
-          formData
+          formData,{headers:{Authorization:token}}
         );
         const response = await sendFormData;
         const { data, status } = response;

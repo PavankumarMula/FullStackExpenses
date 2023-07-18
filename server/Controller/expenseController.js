@@ -7,7 +7,9 @@ const expenseModel = require("../Model/expenseModel");
 exports.addExpenses = async (req, res) => {
   // destructuring the inputs
   const { expense, desc, price, select } = req.body;
-
+ 
+  // accessing the userid
+  const userId=req.userId;
   // pushing into the database
   try {
     await expenseModel.create({
@@ -15,6 +17,7 @@ exports.addExpenses = async (req, res) => {
       description: desc,
       price: price,
       category: select,
+      userId:userId // foreign Key
     });
     return res.status(200).json("expense Added Sucessfully");
   } catch (error) {
@@ -25,7 +28,9 @@ exports.addExpenses = async (req, res) => {
 // function get expenses from database
 exports.getExpenses = async (req, res) => {
   try {
-    const allExpenses = await expenseModel.findAll();
+    const allExpenses = await expenseModel.findAll({where:{
+      userId:req.userId
+    }});
     return res.json(allExpenses);
   } catch (error) {
     return res.status(500).json("internal server error");

@@ -6,15 +6,21 @@ export const userAuthContext = React.createContext();
 // The Component which provide this context
 const AuthContextProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  
 
   // if the user logged in hit this function
-  const login = () => {
-    setIsUserLoggedIn(true);
+  const login = (token,userName) => {
+    if(token){
+      localStorage.setItem('token', token);
+      setIsUserLoggedIn(true);
+      
+    }
   };
 
   // if the user logged out hit this function
   const logout = () => {
     setIsUserLoggedIn(false);
+    localStorage.removeItem('token');// remove the token from local storage
   };
 
   // finally this is the value or data which is shared among all the componets

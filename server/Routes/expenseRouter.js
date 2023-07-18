@@ -4,11 +4,13 @@ const router=express.Router();
 
 const expenseController=require('../Controller/expenseController');
 
+const {userAuthentication}=require('../middlewares/userAuthentication');
+
 //router for adding expense into database
-router.post('/expenses',expenseController.addExpenses);
+router.post('/expenses',userAuthentication,expenseController.addExpenses);
 
 //router for getting all expenses 
-router.get('/expenses',expenseController.getExpenses);
+router.get('/expenses',userAuthentication,expenseController.getExpenses);
 
 //router for editing all the expenses
 router.put('/expenses',expenseController.editExpense);

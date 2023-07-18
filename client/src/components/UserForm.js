@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "../styles/UserForm.css";
 import axios from "axios";
 import { userAuthContext } from "../context/userAuth";
 import { useContext } from "react";
+import { expensesContext } from "../context/expenseContext";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -10,9 +12,13 @@ const UserForm = () => {
   const [password, setPassword] = useState("");
   const [haveAnAccount, setHaveAnAccount] = useState(false);
 
+  const navigate=useNavigate();
+
   // getting auth context here
   const authContext = useContext(userAuthContext);
 
+  // getting expense context
+  const expenseContext=useContext(expensesContext);
 
   // Handling the user Input through Form
   const formHandler = async (e) => {
@@ -26,11 +32,12 @@ const UserForm = () => {
           `http://localhost:4000/existinguser`,
           existinguser
         );
-        const { status } = await getUser;
-        if (status === 200) {
-          authContext.login();
-        } else {
-          throw new Error("some thing is wrong with status codes");
+        const response = await getUser;
+        if (response.status === 200) {
+          const { user, token } = response.data;
+          authContext.login(token,user);
+          expenseContext.addExpense();
+          navigate('/displayexpenses');
         }
       } catch (error) {
         console.log(error);

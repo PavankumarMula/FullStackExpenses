@@ -7,6 +7,7 @@ export const expensesContext = React.createContext();
 // creating expenses Context provider so that data will be shared among components
 const ExpenseCtxProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
+  
 
   // fetch when new expense is added to to array.
   useEffect(() => {
@@ -15,8 +16,9 @@ const ExpenseCtxProvider = ({ children }) => {
 
   // function to fetch expenses ;
   const fetchExpensesFromDb = async () => {
+    const token=localStorage.getItem('token');
     try {
-      const fetchExpenses = await axios.get(`http://localhost:4000/expenses`);
+      const fetchExpenses = await axios.get(`http://localhost:4000/expenses`,{headers:{Authorization:token}});
       const response = await fetchExpenses;
       const { data, status } = response;
       if (status === 200) {
