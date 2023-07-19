@@ -15,3 +15,21 @@
     color: black;
 }
 
+#premium-button{
+    background: linear-gradient(to right, #FFC107, #FF9800);
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+#premium-button:hover {
+    /* You can add additional hover effects here */
+    transform: scale(1.05);
+  }
+  
+ 
+

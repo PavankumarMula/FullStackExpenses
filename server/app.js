@@ -20,10 +20,15 @@ app.use(expenseRouter);
 // models
 const userModel=require('./Model/userModel');
 const expenseModel=require('./Model/expenseModel');
+const orderModel=require('./Model/orderModel');
 
-// Assciations
+// User and Expenses Association
 userModel.hasMany(expenseModel);
 expenseModel.belongsTo(userModel);
+
+//user and Orders Association
+userModel.hasMany(orderModel);
+orderModel.belongsTo(userModel);
 
 sequelize
   .sync()
