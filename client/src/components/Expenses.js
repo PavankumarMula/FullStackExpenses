@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { expensesContext } from "../context/expenseContext";
 import { useContext } from "react";
+import { userAuthContext } from "../context/userAuth";
 
 const Expenses = () => {
   const [expense, setExpense] = useState("");
@@ -15,6 +16,9 @@ const Expenses = () => {
 
   // accesssing expense Context
   const expenseCtx = useContext(expensesContext);
+
+  //accessing user context
+  const userCtx= useContext(userAuthContext);
 
   // accessing data received by useNaviagate
   const location = useLocation();
@@ -30,7 +34,6 @@ const Expenses = () => {
     }
   }, [data]);
 
-  // using navige hook from react router dom
   const navigate = useNavigate();
 
   // handling form once user is submitted
@@ -107,7 +110,8 @@ const Expenses = () => {
   };
 
   return (
-    <div className="expense-form-container">
+   <>
+   {userCtx.isUserLoggedIn ? <div className="expense-form-container">
       <form onSubmit={formHandler} className="expense-form">
         <label htmlFor="Expense">Expense</label>
         <input
@@ -140,7 +144,9 @@ const Expenses = () => {
         </select>
         <button type="submit">Submit</button>
       </form>
-    </div>
+    </div>:<h2>Please Log In</h2>}
+   
+   </>
   );
 };
 

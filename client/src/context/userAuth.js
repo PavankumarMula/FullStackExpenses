@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 // Creating Context Api for Auth
 export const userAuthContext = React.createContext();
@@ -6,6 +7,29 @@ export const userAuthContext = React.createContext();
 // The Component which provide this context
 const AuthContextProvider = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isPremiumUser,setIsPremuisUser] = useState(false);
+  const [userName,setIsUserName] = useState("");
+
+  useEffect(()=>{
+   const fetchUser=async()=>{
+    const token=localStorage.getItem('token');
+   try {
+    const response=await axios.get(`http://localhost:4000/user`,{headers:{Authorization:token}}); 
+    const {status,data}=response;
+    if(status===200){
+      setIsPremuisUser(data.isPremium);
+      setIsUserName(data.username);
+    }else{
+      throw new Error("some thing is wrong with fetching user");
+    }
+   } 
+   
+   catch (error) {
+    console.log(error);
+   }
+   }
+   fetchUser()
+  },[isUserLoggedIn]);
   
 
   // if the user logged in hit this function
@@ -21,13 +45,21 @@ const AuthContextProvider = ({ children }) => {
   const logout = () => {
     setIsUserLoggedIn(false);
     localStorage.removeItem('token');// remove the token from local storage
+    setIsPremuisUser(false)
   };
+
+  const setPremuisUser=()=>{
+    setIsPremuisUser(true);
+  }
 
   // finally this is the value or data which is shared among all the componets
   const userAuthValue = {
     isUserLoggedIn,
     login,
     logout,
+    isPremiumUser,
+    userName,
+    setPremuisUser
   };
 
   return (

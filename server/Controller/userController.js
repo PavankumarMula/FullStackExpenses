@@ -84,3 +84,18 @@ exports.getuser = async (req, res) => {
     return res.status(500).json("Internal server error");
   }
 };
+
+// send user details for premium button
+exports.getUserDetails=async(req,res)=>{
+  const userId=req.userId;
+  try {
+    const user=await userModel.findByPk(userId);
+    if(!user){
+      res.status(404).json('user not found');
+    }
+    res.status(200).json(user);
+
+  } catch (error) {
+    res.status(500).json('internal error occured');
+  }
+}

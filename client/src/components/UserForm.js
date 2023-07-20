@@ -37,7 +37,7 @@ const UserForm = () => {
           const { user, token } = response.data;
           authContext.login(token,user);
           expenseContext.addExpense();
-          navigate('/displayexpenses');
+          navigate('/expenses');
         }
       } catch (error) {
         console.log(error);
