@@ -118,6 +118,12 @@ const NavBar = () => {
             Buy Premium
           </button>
         )}
+
+        {isPremiumUser ? (
+          <button onClick={() => navigate("/leaderboard")}>Leader Board</button>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

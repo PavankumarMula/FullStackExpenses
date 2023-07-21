@@ -6,14 +6,16 @@ export const userAuthContext = React.createContext();
 
 // The Component which provide this context
 const AuthContextProvider = ({ children }) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  const initialLoggedInState = !!localStorage.getItem('token');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(initialLoggedInState);
   const [isPremiumUser,setIsPremuisUser] = useState(false);
   const [userName,setIsUserName] = useState("");
 
 
   useEffect(()=>{
-   fetchUser();
-  },[isUserLoggedIn]);
+    fetchUser();
+  },[]);
   
   // fetching user details whenever the user logged in logged out and buys premium
   const fetchUser=async()=>{
@@ -41,7 +43,7 @@ const AuthContextProvider = ({ children }) => {
     if(token){
       localStorage.setItem('token', token);
       setIsUserLoggedIn(true);
-      //fetchUser()
+      fetchUser()
     }
   };
 

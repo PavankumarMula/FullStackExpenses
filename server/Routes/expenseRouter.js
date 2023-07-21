@@ -6,9 +6,9 @@ const expenseController = require("../Controller/expenseController");
 
 const { userAuthentication } = require("../middlewares/userAuthentication");
 
-const { getOrderId } = require("../razorpay/premiumFeature");
+const { getPaymentId,updateOrderStatus,getOrderId } = require("../razorpay/premiumFeature");
 
-const { getPaymentId,updateOrderStatus } = require("../razorpay/premiumFeature");
+const {leaderBoardExpenses} = require('../Controller/leaderBoard');
 
 //router for adding expense into database
 router.post("/expenses", userAuthentication, expenseController.addExpenses);
@@ -30,5 +30,8 @@ router.post("/updatepremium", userAuthentication,  getPaymentId);
 
 //router for updating status for order when payment is failed
 router.post('/updatestatus',userAuthentication,updateOrderStatus);
+
+//router for showing leader board
+router.get('/leaderboard',leaderBoardExpenses);
 
 module.exports = router;
