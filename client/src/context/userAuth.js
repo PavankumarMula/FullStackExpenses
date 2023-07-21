@@ -10,26 +10,30 @@ const AuthContextProvider = ({ children }) => {
   const [isPremiumUser,setIsPremuisUser] = useState(false);
   const [userName,setIsUserName] = useState("");
 
+
   useEffect(()=>{
-   const fetchUser=async()=>{
-    const token=localStorage.getItem('token');
-   try {
-    const response=await axios.get(`http://localhost:4000/user`,{headers:{Authorization:token}}); 
-    const {status,data}=response;
-    if(status===200){
-      setIsPremuisUser(data.isPremium);
-      setIsUserName(data.username);
-    }else{
-      throw new Error("some thing is wrong with fetching user");
-    }
-   } 
-   
-   catch (error) {
-    console.log(error);
-   }
-   }
-   fetchUser()
+   fetchUser();
   },[isUserLoggedIn]);
+  
+  // fetching user details whenever the user logged in logged out and buys premium
+  const fetchUser=async()=>{
+    const token=localStorage.getItem('token');
+      try {
+        const response=await axios.get(`http://localhost:4000/user`,{headers:{Authorization:token}}); 
+        const {status,data}=response;
+        if(status===200){
+          setIsPremuisUser(data.isPremium);
+          setIsUserName(data.username);
+          setIsUserLoggedIn(true);
+        }else{
+          throw new Error("some thing is wrong with fetching user");
+        }
+       } 
+       catch (error) {
+        console.log(error);
+       
+       }
+    }
   
 
   // if the user logged in hit this function
@@ -37,7 +41,7 @@ const AuthContextProvider = ({ children }) => {
     if(token){
       localStorage.setItem('token', token);
       setIsUserLoggedIn(true);
-      
+      //fetchUser()
     }
   };
 
