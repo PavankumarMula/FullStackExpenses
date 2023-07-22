@@ -32,17 +32,15 @@ const LeaderBoard = () => {
         style={{
           height: "100vh",
           width: "100%",
-          backgroundColor: "black",
           display: "flex",
-          color: "red",
+        
         }}
       >
-        <table style={{ backgroundColor: "whitesmoke", marginTop: "80px" }}>
+        <table style={{ marginTop: "80px" }}>
           <tbody>
             <tr style={{ fontFamily: "sans-serif", fontSize: "20px" }}>
               <th>Name</th>
               <th>Amount</th>
-              <th>Category</th>
             </tr>
             {users.map((user) => {
               return (
@@ -52,7 +50,6 @@ const LeaderBoard = () => {
                 >
                   <td>{user.name}</td>
                   <td>Rs.{user.totalAmount}</td>
-                  <td>{user.category}</td>
                 </tr>
               );
             })}

@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import "../styles/NavBar.css";
-import { Link } from "react-router-dom";
+import {  NavLink,useLocation } from "react-router-dom";
 import { userAuthContext } from "../context/userAuth";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// toastify message
+// toasting alert
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// function for toastfy an alert
+const notify = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+}
+
 const NavBar = () => {
   const authCtx = useContext(userAuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isPremiumUser, userName } = authCtx;
 
@@ -16,8 +36,10 @@ const NavBar = () => {
 
   // handling log out functionality
   const logoutHandler = () => {
+    notify('user logged out')
     authCtx.logout();
     navigate("/login");
+
   };
 
   // handling premium feature functionalities
@@ -62,7 +84,7 @@ const NavBar = () => {
 
               const { status, data } = res;
               if (status === 200) {
-                alert(data.message);
+                notify(data.message);
                 authCtx.setPremuisUser(`http://localhost:4000/updatepremium`);
               }
             } catch (error) {
@@ -90,7 +112,7 @@ const NavBar = () => {
               }
             );
           } catch (error) {
-            alert(error);
+            notify('something went wrong');
           }
           alert("payment is Failed");
         });
@@ -105,12 +127,17 @@ const NavBar = () => {
   return (
     <>
       <div className="nav-container">
-        <Link to="/login">Register</Link>
-        <Link to="/expenses">Add Expense</Link>
-        <Link to="/displayexpenses">Expenses</Link>
-        <button onClick={logoutHandler}>Logout</button>
+      <NavLink to="/login" className={location.pathname === '/login' ? 'active-link' : ''}>
+        Register
+      </NavLink>
+      <NavLink to="/expenses" className={location.pathname === '/expenses' ? 'active-link' : ''}>
+        Add Expense
+      </NavLink>
+      <NavLink to="/displayexpenses" className={location.pathname === '/displayexpenses' ? 'active-link' : ''}>
+        Expenses
+      </NavLink>
         {isPremiumUser ? (
-          <h4 style={{ color: "red" }}>
+          <h4 style={{ color: "black" }}>
             {userName.toUpperCase()}, a Premium User
           </h4>
         ) : (
@@ -124,7 +151,9 @@ const NavBar = () => {
         ) : (
           ""
         )}
+         <button onClick={logoutHandler}>Logout</button>
       </div>
+      <ToastContainer/>
     </>
   );
 };

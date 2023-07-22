@@ -5,6 +5,24 @@ import { userAuthContext } from "../context/userAuth";
 import { useContext } from "react";
 import { expensesContext } from "../context/expenseContext";
 import { useNavigate } from "react-router-dom";
+// toasting alert
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// function for toastfy an alert
+const notify = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+}
+
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -34,6 +52,7 @@ const UserForm = () => {
         );
         const response = await getUser;
         if (response.status === 200) {
+          notify("user LoggedIn")
           const { user, token } = response.data;
           authContext.login(token,user);
           expenseContext.addExpense();
@@ -55,7 +74,7 @@ const UserForm = () => {
           data
         );
        
-        alert(response.data);
+        notify(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -113,6 +132,7 @@ const UserForm = () => {
         <button className="toggle-button" onClick={toggleButtonHandler}>
           {haveAnAccount ? "new User? Signup" : "Already have an Account?"}
         </button>
+        <ToastContainer/>
       </div>
     </>
   );

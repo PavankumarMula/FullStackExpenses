@@ -7,6 +7,24 @@ import { expensesContext } from "../context/expenseContext";
 import { useContext } from "react";
 import { userAuthContext } from "../context/userAuth";
 
+// toasting alert
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// function for toastfy an alert
+const notify = (message) => {
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+}
+
 const Expenses = () => {
   const [expense, setExpense] = useState("");
   const [desc, setDesc] = useState("");
@@ -62,7 +80,7 @@ const Expenses = () => {
         const response = await sendEditedInfo;
         const { data, status } = response;
         if (status === 200) {
-          alert(data);
+          notify(data);
 
           expenseCtx.editExpense();
           // resetting the inputs
@@ -92,7 +110,7 @@ const Expenses = () => {
         const { data, status } = response;
         if (status === 200) {
           expenseCtx.addExpense();
-          alert(data);
+          notify(data);
           // resetting the inputs
           setExpense("");
           setDesc("");
@@ -145,7 +163,7 @@ const Expenses = () => {
         <button type="submit">Submit</button>
       </form>
     </div>:<h2>Please Log In</h2>}
-   
+   <ToastContainer/>
    </>
   );
 };

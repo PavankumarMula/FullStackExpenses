@@ -5,7 +5,7 @@
     width: 25%;
     align-items: center;
     justify-content: center;
-    box-shadow: 2px 4px  8px orange;
+    box-shadow: 2px 4px 18px black;
     margin: auto;
     margin-top: 50px;
     border-radius: 10px;
@@ -16,18 +16,28 @@
    justify-content: center;
    align-items: center;
    width: 100%;
-   gap:10px
+   gap:10px;
+   font-family: 'Barlow', sans-serif;
+   font-family: 'Poppins', sans-serif;
+   font-family: 'Roboto', sans-serif;
 }
 
 .expense-form label{
     font-size: 20px;
-    font-family: monospace;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .expense-form input{
     width: 80%;
     padding: 5px;
     margin-bottom: 10px;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+    color: whitesmoke;
 }
 
 #desc{
@@ -35,19 +45,24 @@
     height: 100px; /* Adjust the height according to your preference */
     resize: vertical; /* Allow vertical resizing if needed */
     padding: 5px;
+    background-color: black;
+    color: whitesmoke;
+    font-size: 15px;
 }
 
 .expense-form select{
     width: 70%;
     padding: 5px;
     margin-bottom: 10px;
+    background-color: black;
+    color: whitesmoke;
 }
 
 .expense-form button{
     width: 70%;
     padding: 10px;
     margin-top: 10px;
-    background-color: #008000;
+    background-color: black;
     color: #fff;
     border: none;
     cursor: pointer;

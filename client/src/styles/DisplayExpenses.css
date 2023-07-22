@@ -6,9 +6,11 @@ table{
     width:80%;
     margin: auto;
     text-align: center;
-    border: 1px solid lightsalmon;
+    border: 1px solid black;
     border-collapse: collapse;
-    font-family: monospace;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
 }
 
@@ -17,13 +19,14 @@ th,td{
     padding: 10px;
     border-bottom: 1px solid;
     margin: 5px;
+    
 }
 
 button {
     padding: 5px 10px;
     margin-left: 5px;
-    background-color: #e74c3c;
-    color: #fff;
+    background-color:black;
+    color:red;
     border: none;
     cursor: pointer;
   }

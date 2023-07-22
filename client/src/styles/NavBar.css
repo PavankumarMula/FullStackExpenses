@@ -1,19 +1,28 @@
 .nav-container{
-    height: 50px;
+    height: 70px;
     width: 100%;
-    background: lightblue;
+    background-color:initial;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
     gap: 50px;
+    /* box-shadow: 2px 0px 2px; */
 }
 .nav-container a{
     text-decoration: none;
-    font-family: monospace;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 30px;
     color: black;
+    
 }
+
+.nav-container a.active-link {
+    /* text-decoration: underline !important; */
+    color:whitesmoke;
+  }
 
 #premium-button{
     background: linear-gradient(to right, #FFC107, #FF9800);
