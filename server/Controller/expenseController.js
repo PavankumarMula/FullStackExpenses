@@ -58,7 +58,6 @@ exports.getExpenses = async (req, res) => {
   }
 };
 
-
 // function to edit the transaction
 exports.editExpense = async (req, res) => {
   // destructuring the incoming request
@@ -123,7 +122,6 @@ exports.editExpense = async (req, res) => {
     return res.status(500).json("Internal Server Error");
   }
 };
-
 
 // function for deleting the data
 exports.deleteFromDb = async (req, res) => {

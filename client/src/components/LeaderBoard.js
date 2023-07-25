@@ -4,10 +4,9 @@ import { expensesContext } from "../context/expenseContext";
 import { useContext } from "react";
 
 const LeaderBoard = () => {
-    const expenseCtx=useContext(expensesContext);
+  const expenseCtx = useContext(expensesContext);
   const [users, setUsers] = useState([]);
-  const [expenses,setExpenses]=useState(expenseCtx.expenses)
-  
+  const [expenses, setExpenses] = useState(expenseCtx.expenses);
 
   //fetch all the expenses
   useEffect(() => {
@@ -33,7 +32,6 @@ const LeaderBoard = () => {
           height: "100vh",
           width: "100%",
           display: "flex",
-        
         }}
       >
         <table style={{ marginTop: "80px" }}>
@@ -46,7 +44,7 @@ const LeaderBoard = () => {
               return (
                 <tr
                   key={user.id}
-                  style={{ fontFamily: 'monospace', fontSize: "18px" }}
+                  style={{ fontFamily: "monospace", fontSize: "18px" }}
                 >
                   <td>{user.name}</td>
                   <td>Rs.{user.totalExpense}</td>

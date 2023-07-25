@@ -36,32 +36,33 @@ const DisplayExpenses = () => {
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
-              {expenses.length>0 && expenses.map((expense) => (
-                <tr key={expense.id}>
-                  <td>{expense.expenseName}</td>
-                  <td>{expense.description}</td>
-                  <td>Rs.{expense.price}</td>
-                  <td>{expense.category}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        editHandler(expense);
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        deleteHandler(expense);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {expenses.length > 0 &&
+                expenses.map((expense) => (
+                  <tr key={expense.id}>
+                    <td>{expense.expenseName}</td>
+                    <td>{expense.description}</td>
+                    <td>Rs.{expense.price}</td>
+                    <td>{expense.category}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          editHandler(expense);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          deleteHandler(expense);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

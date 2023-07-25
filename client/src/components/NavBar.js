@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/NavBar.css";
-import {  NavLink,useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { userAuthContext } from "../context/userAuth";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,8 @@ import axios from "axios";
 
 // toastify message
 // toasting alert
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // function for toastfy an alert
 const notify = (message) => {
@@ -22,8 +22,8 @@ const notify = (message) => {
     draggable: true,
     progress: undefined,
     theme: "light",
-    });
-}
+  });
+};
 
 const NavBar = () => {
   const authCtx = useContext(userAuthContext);
@@ -36,10 +36,9 @@ const NavBar = () => {
 
   // handling log out functionality
   const logoutHandler = () => {
-    notify('user logged out')
+    notify("user logged out");
     authCtx.logout();
     navigate("/login");
-
   };
 
   // handling premium feature functionalities
@@ -112,7 +111,7 @@ const NavBar = () => {
               }
             );
           } catch (error) {
-            notify('something went wrong');
+            notify("something went wrong");
           }
           alert("payment is Failed");
         });
@@ -127,15 +126,26 @@ const NavBar = () => {
   return (
     <>
       <div className="nav-container">
-      <NavLink to="/login" className={location.pathname === '/login' ? 'active-link' : ''}>
-        Register
-      </NavLink>
-      <NavLink to="/expenses" className={location.pathname === '/expenses' ? 'active-link' : ''}>
-        Add Expense
-      </NavLink>
-      <NavLink to="/displayexpenses" className={location.pathname === '/displayexpenses' ? 'active-link' : ''}>
-        Expenses
-      </NavLink>
+        <NavLink
+          to="/login"
+          className={location.pathname === "/login" ? "active-link" : ""}
+        >
+          Register
+        </NavLink>
+        <NavLink
+          to="/expenses"
+          className={location.pathname === "/expenses" ? "active-link" : ""}
+        >
+          Add Expense
+        </NavLink>
+        <NavLink
+          to="/displayexpenses"
+          className={
+            location.pathname === "/displayexpenses" ? "active-link" : ""
+          }
+        >
+          Expenses
+        </NavLink>
         {isPremiumUser ? (
           <h4 style={{ color: "black" }}>
             {userName.toUpperCase()}, a Premium User
@@ -151,9 +161,9 @@ const NavBar = () => {
         ) : (
           ""
         )}
-         <button onClick={logoutHandler}>Logout</button>
+        <button onClick={logoutHandler}>Logout</button>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

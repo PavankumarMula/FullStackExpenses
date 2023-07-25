@@ -1,26 +1,26 @@
-const express=require('express');
+const express = require("express");
 
-const app=express();
+const app = express();
 
-const userRouter=require('./Routes/userRouter');
+const userRouter = require("./Routes/userRouter");
 
-const expenseRouter=require('./Routes/expenseRouter');
+const expenseRouter = require("./Routes/expenseRouter");
 
-const sequelize=require('./DataBase/database');
+const sequelize = require("./DataBase/database");
 
-const cors=require('cors');
+const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
 
-// routing 
+// routing
 app.use(userRouter);
 app.use(expenseRouter);
 
 // models
-const userModel=require('./Model/userModel');
-const expenseModel=require('./Model/expenseModel');
-const orderModel=require('./Model/orderModel');
+const userModel = require("./Model/userModel");
+const expenseModel = require("./Model/expenseModel");
+const orderModel = require("./Model/orderModel");
 
 // User and Expenses Association
 userModel.hasMany(expenseModel);
@@ -40,4 +40,3 @@ sequelize
   .catch((err) => {
     console.log(err);
   });
-

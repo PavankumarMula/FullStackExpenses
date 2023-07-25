@@ -36,27 +36,25 @@ const ExpenseCtxProvider = ({ children }) => {
   };
 
   // function for deleting the expense
-  
 
-const removeExpense = async (expense) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    try {
-      const response = await axios.delete('http://localhost:4000/expenses', {
-        headers: {
-          Authorization: token,
-        },
-        data: expense, // The data to be passed in the request body
-      });
+  const removeExpense = async (expense) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const response = await axios.delete("http://localhost:4000/expenses", {
+          headers: {
+            Authorization: token,
+          },
+          data: expense, // The data to be passed in the request body
+        });
 
-       // If you want to log the response data
-       setExpenses(response.data);
-    } catch (error) {
-      console.error(error);
+        // If you want to log the response data
+        setExpenses(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
-};
-
+  };
 
   // after adding expense into db fetch again
   const addExpense = () => {
