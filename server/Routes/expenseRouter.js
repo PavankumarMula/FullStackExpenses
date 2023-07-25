@@ -17,10 +17,10 @@ router.post("/expenses", userAuthentication, expenseController.addExpenses);
 router.get("/expenses", userAuthentication, expenseController.getExpenses);
 
 //router for editing all the expenses
-router.put("/expenses", expenseController.editExpense);
+router.put("/expenses", userAuthentication, expenseController.editExpense);
 
 //router for delete the expense
-router.delete("/expenses/:id", expenseController.deleteFromDb);
+router.delete("/expenses",userAuthentication, expenseController.deleteFromDb);
 
 //router for premium feature
 router.get("/premium", userAuthentication, getOrderId);

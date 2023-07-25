@@ -7,7 +7,6 @@ export const expensesContext = React.createContext();
 // creating expenses Context provider so that data will be shared among components
 const ExpenseCtxProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
-  
 
   // fetch when new expense is added to to array.
   useEffect(() => {
@@ -16,15 +15,20 @@ const ExpenseCtxProvider = ({ children }) => {
 
   // function to fetch expenses ;
   const fetchExpensesFromDb = async () => {
-    const token=localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
-      const fetchExpenses = await axios.get(`http://localhost:4000/expenses`,{headers:{Authorization:token}});
-      const response = await fetchExpenses;
-      const { data, status } = response;
-      if (status === 200) {
-        setExpenses(data);
-      } else {
-        throw new Error("something wrong with fetcging expenses");
+      if (token) {
+        const fetchExpenses = await axios.get(
+          `http://localhost:4000/expenses`,
+          { headers: { Authorization: token } }
+        );
+        const response = await fetchExpenses;
+        const { data, status } = response;
+        if (status === 200) {
+          setExpenses(data);
+        } else {
+          throw new Error("something wrong with fetcging expenses");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -32,22 +36,27 @@ const ExpenseCtxProvider = ({ children }) => {
   };
 
   // function for deleting the expense
-  const removeExpense = async (id) => {
+  
+
+const removeExpense = async (expense) => {
+  const token = localStorage.getItem("token");
+  if (token) {
     try {
-      const deleteExpense = await axios.delete(
-        `http://localhost:4000/expenses/${id}`
-      );
-      const { status } = await deleteExpense;
-      if (status === 200) {
-        // after deleting expense from db fetch again;
-        fetchExpensesFromDb();
-      } else {
-        throw new Error("some thing went wrong while deleting");
-      }
+      const response = await axios.delete('http://localhost:4000/expenses', {
+        headers: {
+          Authorization: token,
+        },
+        data: expense, // The data to be passed in the request body
+      });
+
+       // If you want to log the response data
+       setExpenses(response.data);
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
-  };
+  }
+};
+
 
   // after adding expense into db fetch again
   const addExpense = () => {

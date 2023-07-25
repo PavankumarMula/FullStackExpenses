@@ -17,9 +17,9 @@ const DisplayExpenses = () => {
   };
 
   // expenses delete handler
-  const deleteHandler = (id) => {
+  const deleteHandler = (expense) => {
     // make http request to delete the product
-    expenseCtx.removeExpense(id);
+    expenseCtx.removeExpense(expense);
   };
 
   return (
@@ -36,7 +36,7 @@ const DisplayExpenses = () => {
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
-              {expenses.map((expense) => (
+              {expenses.length>0 && expenses.map((expense) => (
                 <tr key={expense.id}>
                   <td>{expense.expenseName}</td>
                   <td>{expense.description}</td>
@@ -54,7 +54,7 @@ const DisplayExpenses = () => {
                   <td>
                     <button
                       onClick={() => {
-                        deleteHandler(expense.id);
+                        deleteHandler(expense);
                       }}
                     >
                       Delete

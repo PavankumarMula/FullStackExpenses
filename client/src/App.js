@@ -13,6 +13,7 @@ function App() {
       <div>
         <NavBar />
         <Routes>
+          <Route path="/" exact  element={<UserForm/>}></Route>
           <Route path="/login" element={<UserForm />}></Route>
           <Route path="/expenses" element={<Expenses />}></Route>
           <Route path="/displayexpenses" element={<DisplayExpenses />}></Route>

@@ -49,7 +49,7 @@ const LeaderBoard = () => {
                   style={{ fontFamily: 'monospace', fontSize: "18px" }}
                 >
                   <td>{user.name}</td>
-                  <td>Rs.{user.totalAmount}</td>
+                  <td>Rs.{user.totalExpense}</td>
                 </tr>
               );
             })}

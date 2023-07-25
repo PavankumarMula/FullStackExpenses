@@ -29,6 +29,9 @@ const user=sequelize.define('users',{
         type:Sequelize.BOOLEAN,
         allowNull:false,
         defaultValue:false
+    },
+    totalExpense:{
+        type: Sequelize.DECIMAL(10, 2), 
     }
 })
 
