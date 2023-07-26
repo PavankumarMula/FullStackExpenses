@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Expenses from "./components/Expenses";
 import DisplayExpenses from "./components/DisplayExpenses";
 import LeaderBoard from "./components/LeaderBoard";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/expenses" element={<Expenses />}></Route>
           <Route path="/displayexpenses" element={<DisplayExpenses />}></Route>
           <Route path="leaderboard" element={<LeaderBoard />}></Route>
+          <Route path="forgotPassword" element={<ForgotPassword/>}></Route>
         </Routes>
       </div>
     </>

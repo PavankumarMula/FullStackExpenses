@@ -17,6 +17,11 @@ router.post('/existinguser',userController.getuser);
 //get user details fro premium details
 router.get('/user',userAuthentication,getUserDetails);
 
+// router for forgotten password
+router.post('/forgotpassword',(req,res)=>{
+    res.json(req.body);
+})
+
 
 
 module.exports=router;

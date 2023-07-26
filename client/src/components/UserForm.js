@@ -1,13 +1,13 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "../styles/UserForm.css";
 import axios from "axios";
 import { userAuthContext } from "../context/userAuth";
 import { useContext } from "react";
 import { expensesContext } from "../context/expenseContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // toasting alert
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // function for toastfy an alert
 const notify = (message) => {
@@ -20,9 +20,8 @@ const notify = (message) => {
     draggable: true,
     progress: undefined,
     theme: "light",
-    });
-}
-
+  });
+};
 
 const UserForm = () => {
   const [name, setName] = useState("");
@@ -30,13 +29,13 @@ const UserForm = () => {
   const [password, setPassword] = useState("");
   const [haveAnAccount, setHaveAnAccount] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   // getting auth context here
   const authContext = useContext(userAuthContext);
 
   // getting expense context
-  const expenseContext=useContext(expensesContext);
+  const expenseContext = useContext(expensesContext);
 
   // Handling the user Input through Form
   const formHandler = async (e) => {
@@ -52,11 +51,11 @@ const UserForm = () => {
         );
         const response = await getUser;
         if (response.status === 200) {
-          notify("user LoggedIn")
+          notify("user LoggedIn");
           const { user, token } = response.data;
-          authContext.login(token,user);
+          authContext.login(token, user);
           expenseContext.addExpense();
-          navigate('/expenses');
+          navigate("/expenses");
         }
       } catch (error) {
         console.log(error);
@@ -73,7 +72,7 @@ const UserForm = () => {
           `http://localhost:4000/newuser`,
           data
         );
-       
+
         notify(response.data);
       } catch (error) {
         console.log(error);
@@ -132,7 +131,12 @@ const UserForm = () => {
         <button className="toggle-button" onClick={toggleButtonHandler}>
           {haveAnAccount ? "new User? Signup" : "Already have an Account?"}
         </button>
-        <ToastContainer/>
+        {haveAnAccount && (
+          <Link to="forgotPassword" className="forgotpassword">
+            ForgotPassword?
+          </Link>
+        )}
+        <ToastContainer />
       </div>
     </>
   );

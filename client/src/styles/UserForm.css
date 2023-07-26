@@ -57,3 +57,15 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.forgotpassword {
+    color: black;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    margin-top: 15px;
+    text-decoration: none;
+}
+.forgotpassword:hover{
+    text-decoration: underline brown;
+}
