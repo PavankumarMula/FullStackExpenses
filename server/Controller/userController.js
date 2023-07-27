@@ -2,6 +2,9 @@ const userModel = require("../Model/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
+
+
 //function to  Add a new  user to the database
 exports.addUser = async (req, res) => {
   const username = req.body.name;
@@ -99,3 +102,7 @@ exports.getUserDetails=async(req,res)=>{
     res.status(500).json('internal error occured');
   }
 }
+
+
+
+

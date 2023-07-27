@@ -131,11 +131,7 @@ const UserForm = () => {
         <button className="toggle-button" onClick={toggleButtonHandler}>
           {haveAnAccount ? "new User? Signup" : "Already have an Account?"}
         </button>
-        {haveAnAccount && (
-          <Link to="forgotPassword" className="forgotpassword">
-            ForgotPassword?
-          </Link>
-        )}
+        {haveAnAccount && <button style={{marginTop:'20px'}} onClick={()=>navigate('/forgotPassword')}>Forgot Password?</button>}
         <ToastContainer />
       </div>
     </>

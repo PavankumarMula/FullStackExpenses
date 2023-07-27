@@ -6,19 +6,24 @@ import Expenses from "./components/Expenses";
 import DisplayExpenses from "./components/DisplayExpenses";
 import LeaderBoard from "./components/LeaderBoard";
 import ForgotPassword from "./components/ForgotPassword";
+import { userAuthContext } from "./context/userAuth";
+import { useContext } from "react";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
+  const context = useContext(userAuthContext);
   return (
     <>
       <div>
         <NavBar />
         <Routes>
-          <Route path="/" exact element={<UserForm />}></Route>
-          <Route path="/login" element={<UserForm />}></Route>
-          <Route path="/expenses" element={<Expenses />}></Route>
-          <Route path="/displayexpenses" element={<DisplayExpenses />}></Route>
-          <Route path="leaderboard" element={<LeaderBoard />}></Route>
-          <Route path="forgotPassword" element={<ForgotPassword/>}></Route>
+          <Route exact path="/"  element={<UserForm />}></Route>
+          <Route exact path="/login" element={<UserForm />}></Route>
+          <Route exact path="/expenses" element={<Expenses />}></Route>
+          <Route exact path="/displayexpenses" element={<DisplayExpenses />}></Route>
+          <Route exact path="leaderboard" element={<LeaderBoard />}></Route>
+        { !context.isUserLoggedIn&& <Route exact path="forgotPassword" element={<ForgotPassword/>}></Route>}
+         <Route exact path="/resetPassword/:id" element={<ResetPassword/>}></Route>
         </Routes>
       </div>
     </>
