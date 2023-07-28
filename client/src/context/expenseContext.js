@@ -7,6 +7,7 @@ export const expensesContext = React.createContext();
 // creating expenses Context provider so that data will be shared among components
 const ExpenseCtxProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
+  
 
   // fetch when new expense is added to to array.
   useEffect(() => {
@@ -66,12 +67,16 @@ const ExpenseCtxProvider = ({ children }) => {
     fetchExpensesFromDb();
   };
 
+  
+
   const contextValue = {
     expenses,
     removeExpense,
     editExpense,
     addExpense,
   };
+
+  
 
   return (
     <>

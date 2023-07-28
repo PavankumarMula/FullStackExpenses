@@ -13,6 +13,7 @@ import ReportGeneration from "./components/ReportGeneration";
 
 function App() {
   const context = useContext(userAuthContext);
+ 
   return (
     <>
       <div>
@@ -22,10 +23,10 @@ function App() {
           <Route exact path="/login" element={<UserForm />}></Route>
           <Route exact path="/expenses" element={<Expenses />}></Route>
           <Route exact path="/displayexpenses" element={<DisplayExpenses />}></Route>
-          <Route exact path="leaderboard" element={<LeaderBoard />}></Route>
+         {context.isPremiumUser && <Route exact path="leaderboard" element={<LeaderBoard />}></Route>}
         { !context.isUserLoggedIn&& <Route exact path="forgotPassword" element={<ForgotPassword/>}></Route>}
          <Route exact path="/resetPassword/:id" element={<ResetPassword/>}></Route>
-         <Route exact path="/report" element={<ReportGeneration/>}></Route>
+         {context.isPremiumUser&& <Route exact path="/report" element={<ReportGeneration/>}></Route>}
         </Routes>
       </div>
     </>

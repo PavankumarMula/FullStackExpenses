@@ -1,45 +1,22 @@
 .report-container{
-    height: 60vh;
+    justify-content: center;
     width: 100%;
+    background-color: #ff7f00;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FF7F00;
 }
-.report-tabel{
-        width:80%;
-        margin: auto;
-        text-align: center;
-        border: 1px solid black;
-        /* border-collapse: collapse; */
-        font-family: 'Barlow', sans-serif;
-        font-family: 'Poppins', sans-serif;
-        font-family: 'Roboto', sans-serif;
-        font-size: 15px;
-        margin-bottom: 70vh;
-    }
-    
-    .report-tabel th,td{
-        text-align: center;
-        padding: 10px;
-        border-bottom: 1px solid;
-        margin: 5px;
-        
-    }
-    .report-table th, .report-table ,td {
-        padding: 10px;
-        border: 1px solid black;
-    }
-    
-    .report-table ,th {
-        background-color:  #FF7F00; /* You can set a background color for table header if desired */
-    }
-    
-    .report-table ,td {
-        border-bottom: 1px solid black;
-    }
-    
-    .report-table ,tr:last-child td {
-        border-bottom: none; /* Remove bottom border for the last row to avoid double lines */
-    }
-   
+#report-table{
+    width: 80%;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+#download-button{
+    background-color:black;
+    color: #ff7f00;
+    margin-bottom: 40px;
+    height: 30px;
+}
