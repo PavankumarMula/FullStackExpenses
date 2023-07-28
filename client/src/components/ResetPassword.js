@@ -25,7 +25,7 @@ const notify = (message) => {
 const ResetPassword = () => {
   const { id } = useParams();
   const [input, setInput] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   // reset form handler
   const resetHandler = async (e) => {
@@ -35,7 +35,7 @@ const ResetPassword = () => {
       { password: input }
     );
     notify(response.data);
-    navigate('/login');
+    navigate("/login");
   };
   return (
     <div
@@ -75,7 +75,7 @@ const ResetPassword = () => {
         ></input>
         <button type="submit">submit</button>
       </form>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

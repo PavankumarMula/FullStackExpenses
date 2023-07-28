@@ -161,6 +161,7 @@ const NavBar = () => {
         ) : (
           ""
         )}
+        {isPremiumUser&&<button onClick={()=>{navigate('/report')}}>Report</button>}
         <button onClick={logoutHandler}>Logout</button>
       </div>
       <ToastContainer />
