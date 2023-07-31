@@ -11,6 +11,7 @@ import { useContext } from "react";
 import ResetPassword from "./components/ResetPassword";
 import ReportGeneration from "./components/ReportGeneration";
 
+
 function App() {
   const context = useContext(userAuthContext);
  
@@ -27,6 +28,7 @@ function App() {
         { !context.isUserLoggedIn&& <Route exact path="forgotPassword" element={<ForgotPassword/>}></Route>}
          <Route exact path="/resetPassword/:id" element={<ResetPassword/>}></Route>
          {context.isPremiumUser&& <Route exact path="/report" element={<ReportGeneration/>}></Route>}
+        
         </Routes>
       </div>
     </>

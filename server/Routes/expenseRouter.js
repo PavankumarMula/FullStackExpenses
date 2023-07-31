@@ -14,6 +14,8 @@ const {
 
 const { leaderBoardExpenses } = require("../Controller/leaderBoard");
 
+const {getExpensesByPage} = require('../Controller/Pagination');
+
 //router for adding expense into database
 router.post("/expenses", userAuthentication, expenseController.addExpenses);
 
@@ -37,5 +39,8 @@ router.post("/updatestatus", userAuthentication, updateOrderStatus);
 
 //router for showing leader board
 router.get("/leaderboard", leaderBoardExpenses);
+
+//router for pagination
+router.get('/pagination',userAuthentication,getExpensesByPage);
 
 module.exports = router;
