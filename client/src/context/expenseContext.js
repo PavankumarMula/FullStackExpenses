@@ -8,6 +8,7 @@ export const expensesContext = React.createContext();
 const ExpenseCtxProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
   
+  
 
   // fetch when new expense is added to to array.
   useEffect(() => {
@@ -67,13 +68,15 @@ const ExpenseCtxProvider = ({ children }) => {
     fetchExpensesFromDb();
   };
 
+
+
   
 
   const contextValue = {
     expenses,
     removeExpense,
     editExpense,
-    addExpense,
+    addExpense, 
   };
 
   
