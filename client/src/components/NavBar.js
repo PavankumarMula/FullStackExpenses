@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/NavBar.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { userAuthContext } from "../context/userAuth";

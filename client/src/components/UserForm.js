@@ -74,6 +74,7 @@ const UserForm = () => {
         );
 
         notify(response.data);
+        setHaveAnAccount(true);
       } catch (error) {
         console.log(error);
       }
