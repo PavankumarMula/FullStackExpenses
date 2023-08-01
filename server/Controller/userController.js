@@ -45,7 +45,7 @@ exports.addUser = async (req, res) => {
 
 // generating the decrypted userId
 const generateJwt = (id, name) => {
-  return jwt.sign({ userId: id, name: name }, "secretsByPavanPups");
+  return jwt.sign({ userId: id, name: name },process.env.JWT_PASSWORD_TOKEN);
 };
 
 //function to Retrieve user details based on incoming input from form data

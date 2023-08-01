@@ -5,7 +5,7 @@ exports.userAuthentication = (req, res, next) => {
   const token = req.headers.authorization;
   try {
     // decrypting token
-    const { userId } = jwt.verify(token, "secretsByPavanPups");
+    const { userId } = jwt.verify(token, process.env.JWT_PASSWORD_TOKEN);
     // assging userId to req object cause req obj is a global object
     req.userId = userId;
 

@@ -1,15 +1,14 @@
+require('dotenv').config();
+
 const express = require("express");
-
 const app = express();
-
 const userRouter = require("./Routes/userRouter");
-
 const expenseRouter = require("./Routes/expenseRouter");
-
 const sequelize = require("./DataBase/database");
 
-const cors = require("cors");
 
+
+const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
@@ -38,8 +37,8 @@ passwordModel.belongsTo(userModel);
 sequelize
   .sync()
   .then((res) => {
-    app.listen(4000, () => {
-      console.log("server is running on 4000.... sucessfully");
+    app.listen(process.env.APP_PORT || 4000, () => {
+      console.log(`server is running on ${process.env.APP_PORT}`);
     });
   })
   .catch((err) => {

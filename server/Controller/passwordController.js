@@ -6,6 +6,8 @@ const userModel = require("../Model/userModel");
 const passwordModel = require("../Model/forgottenPasswords");
 const bcrypt = require("bcrypt");
 
+const sibKey=process.env.SIB_API_KEY;
+
 exports.forgotPassword = async (req, res) => {
   console.log(req.body.email);
 
@@ -22,8 +24,7 @@ exports.forgotPassword = async (req, res) => {
       );
 
       const apiKey = client.authentications["api-key"];
-      apiKey.apiKey =
-        "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";
+      apiKey.apiKey =sibKey
 
       const tranEmailApi = new Sib.TransactionalEmailsApi();
 

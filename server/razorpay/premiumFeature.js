@@ -2,10 +2,11 @@ const razorPay = require("razorpay");
 const orderModel = require("../Model/orderModel");
 const userModel = require("../Model/userModel");
 
+
 // instantiate razor pay
 const rzp = new razorPay({
-  key_id: "rzp_test_xJziIe3Y4FOHtz",
-  key_secret: "yJLuEYfgAJBQi9vwHxQSYKa9",
+  key_id: process.env.RAZOR_KEY_ID,
+  key_secret: process.env.RAZOR_SECRET,
 });
 
 exports.getOrderId = async (req, res) => {
